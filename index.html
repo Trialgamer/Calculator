@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taschenrechner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2? family=Aclonica&family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <script>
+        function appendOperation(operation){
+            document.getElementById('resultArea').innerHTML +=operation;
+        }
+
+        function calculate(){
+            let container=document.getElementById('resultArea');
+            let result = eval(container.innerHTML);
+            container.innerHTML=result;
+        }
+
+        function deleteLast(){
+            let container=document.getElementById('resultArea');
+            if(container.innerHTML.endsWith(' ')){
+                container.innerHTML=container.innerHTML.slice(0,-3);
+            } else{
+                container.innerHTML = container.innerHTML.slice(0,-1);
+            }
+        }
+
+        function deleteAll(){
+            let container=document.getElementById('resultArea');
+            container.innerHTML = container.innerHTML.slice(0,-99999);
+        }
+    </script>
+</head>
+<body>
+    <div id="resultArea">
+        
+    </div>
+
+    <table>
+        <tr>
+            <td onclick="appendOperation(' (')" class="sign">(</td>
+            <td onclick="appendOperation(') ')" class="sign">)</td>
+            <td onclick="deleteAll()" class="del">CE</td>
+            <td onclick="deleteLast()" class="del">DEL</td>
+        </tr>
+
+        <tr>
+            <td onclick="appendOperation(7)" class="number">7</td>
+            <td onclick="appendOperation(8)" class="number">8</td>
+            <td onclick="appendOperation(9)" class="number">9</td>
+            <td onclick="appendOperation(' - ')" class="sign">-</td>
+        </tr>
+
+        <tr>
+            <td onclick="appendOperation(4)" class="number">4</td>
+            <td onclick="appendOperation(5)" class="number">5</td>
+            <td onclick="appendOperation(6)" class="number">6</td>
+            <td onclick="appendOperation(' / ')" class="sign">/</td>
+        </tr>
+
+        <tr>
+            <td onclick="appendOperation(1)" class="number">1</td>
+            <td onclick="appendOperation(2)" class="number">2</td>
+            <td onclick="appendOperation(3)" class="number">3</td>
+            <td onclick="appendOperation(' * ')" class="sign">x</td>
+        </tr>
+
+        <tr>
+            <td onclick="appendOperation(0)" class="number">0</td>
+            <td onclick="appendOperation('.')" class="number">,</td>
+            <td onclick="calculate()" id="result">=</td>
+            <td onclick="appendOperation(' + ')" class="sign">+</td>
+        </tr>
+    </table>
+</body>
+</html>
